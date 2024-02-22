@@ -1,25 +1,37 @@
 <script lang="ts">;
+	import qualityImg1 from '$lib/assets/img/IMG_7536_1920x.png'
+	import qualityImg2 from '$lib/assets/img/IMG_9607_1_1920x.png'
+	import qualityImg3 from '$lib/assets/img/Capture_d_ecran_le_2023-08-31.png'
+
+	import vouge from '$lib/assets/img/vogue_logo_1920x.png'
+	import forbes from '$lib/assets/img/Forbes_1920x.png'
+	import wwd from '$lib/assets/img/icon-512x512_1920x.png'
+	import elle from '$lib/assets/img/ElleCanada_1920x.png'
+
+
 	let pickImages = [
 		{
 			id: 1,
 			title: 'Design First',
 			subtitle: 'Our original designs are conceived in-house, from our headquarters in Montréal.',
-			img: 'https://maguireshoes.com/cdn/shop/files/IMG_7536_1920x.jpg?v=1693504829'
+			img: qualityImg1
 		},
 		{
 			id: 2,
 			title: 'Transparent Prices',
 			subtitle: 'Make informed decisions and see for yourself the quality of our products.',
-			img: 'https://maguireshoes.com/cdn/shop/files/IMG_9607_1_1920x.jpg?v=1693504469'
+			img: qualityImg2
 		},
 		{
 			id: 3,
 			title: 'Ethical Small-batch Production',
 			subtitle:
 				'We hand pick our factories and produce limited runs to ensure our values are represented throughout the supply chain.',
-			img: 'https://maguireshoes.com/cdn/shop/files/Capture_d_ecran_le_2023-08-31_a_13.00.22_1920x.png?v=1693501246'
+			img: qualityImg3
 		}
 	];
+
+	let brands = [vouge, forbes, wwd, elle]
 
 </script>
 
@@ -48,10 +60,26 @@
 				</div>
 			{/each}
 		</div>
+
+		<div class="mt-24 text-center px-52">
+			<div class="mb-16 text-secondary montreal-text font-semibold text-center">
+				"This Montreal-based footwear and accessory brand is changing how you shop for shoes"
+			</div>
+
+			<div class="px-16 flex items-center justify-between">
+				{#each brands as img }
+					<img src={img} alt={img} width="120"/>
+				{/each}
+			</div>
+		</div>
 	</div>
 </div>
 
 <style>
+	.montreal-text {
+		font-size: 40px;
+		line-height: 48px;
+	}
 	.image {
 		object-fit: cover;
 		width: 506px;

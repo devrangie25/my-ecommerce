@@ -30,7 +30,7 @@
 	</div>
 	<div class="navbar-center">
 		<!-- svelte-ignore a11y-missing-attribute -->
-		<a class="btn btn-ghost text-xl uppercase tracking-widest">Sapatosan</a>
+		<a class="btn btn-ghost text-xl uppercase tracking-widest text-primary font-semibold">Sapatosan</a>
 	</div>
 	<div class="navbar-end">
 		<div class="uppercase font-harmonia font-bold mr-8">

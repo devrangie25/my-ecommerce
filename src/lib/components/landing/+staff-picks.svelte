@@ -66,7 +66,7 @@
 	<div class="flex justify-center">
 		<div class="text-center">
 			<div class="text-6xl text-primary font-semibold">Staff Picks</div>
-			<div class="text-5xl mt-4 text-primary font-regular">Our current favourites</div>
+			<div class="text-5xl mt-4 text-primary font-normal">Our current favourites</div>
 		</div>
 	</div>
 	<div class="mt-16 flex justify-center">
@@ -97,7 +97,7 @@
                                 </span>
                             </div>
                         </div>
-						<p class="text-slate-500 text-base font-regular">{pick.subtitle}</p>
+						<p class="text-slate-500 text-base font-normal">{pick.subtitle}</p>
 					</div>
 				</div>
 			{/each}

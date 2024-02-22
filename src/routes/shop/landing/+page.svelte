@@ -1,9 +1,10 @@
 <script lang="ts">
-	import landingImage from '$lib/assets/img/landing-brown-shoes.jpg';
-	import secondImage from '$lib/assets/img/shoes-4.jpg';
-    import StaffPicks from '$lib/components/landing/+staff-picks.svelte';
-    import Collection from '$lib/components/landing/+collection.svelte';
-    import Quality from '$lib/components/landing/+quality.svelte';
+	import landingImage from '$lib/assets/img/landing-brown-shoes.png';
+	import secondImage from '$lib/assets/img/second-img-shoes-landing.png';
+	import StaffPicks from '$lib/components/landing/+staff-picks.svelte';
+	import Collection from '$lib/components/landing/+collection.svelte';
+	import Quality from '$lib/components/landing/+quality.svelte';
+	import Stores from '$lib/components/landing/+stores.svelte';
 
 	let landing_text = "Church's Brogues";
 	let landing_sub_text = 'The Burwood Decorative';
@@ -32,7 +33,7 @@
 		</div>
 	</div>
 
-	<!-- Second Image in Landing Page -->   
+	<!-- Second Image in Landing Page -->
 	<div class="px-14 grid grid-cols-2 gap-x-10">
 		<div class="flex justify-center items-center">
 			<div class="text-center">
@@ -48,15 +49,20 @@
 		</div>
 	</div>
 
-    <!-- Staff Pick -->
-    <StaffPicks />
-    <!-- Collection -->
-    <Collection />
-    <!-- Quality -->
-    <Quality />
+	<!-- Staff Pick -->
+	<StaffPicks />
+	<!-- Collection -->
+	<Collection />
+	<!-- Quality -->
+	<Quality />
+	<!-- Stores -->
+	<Stores />
 </div>
 
 <style>
+	button {
+		height: 56px;
+	}
 	.shop-now-btn {
 		font-size: 16px;
 		line-height: 24px;
