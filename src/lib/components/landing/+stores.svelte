@@ -28,12 +28,12 @@
 <div class="container mx-auto pb-16 px-10 md:px-0">
 	<div class="flex justify-center">
 		<div class="text-center">
-			<div class="lg:text-6xl text-5xl text-primary font-semibold">Discover our unique</div>
-			<div class="lg:text-5xl text-4xl mt-4 text-primary font-normal">shopping experience</div>
+			<div class="md:text-6xl text-4xl text-primary font-semibold font-harmonia">Discover our unique</div>
+			<div class="md:text-6xl text-4xl mt-2 text-primary font-normal font-frank">shopping experience</div>
 		</div>
 	</div>
 
-	<div class="md:px-24 mt-12 grid lg:grid-cols-4 grid-cols-1 gap-10">
+	<div class="md:px-24 mt-12 grid lg:grid-cols-4 grid-cols-1 gap-10 font-harmonia">
 		{#each stores as store, ind}
 			<div class={`${ind === stores.length - 1 ? 'lg:col-start-2 lg:col-span-2' : 'lg:col-span-2'}`}>
 				<img src={store.img} alt={store.title} class="w-full store-img" />
@@ -56,7 +56,7 @@
 	</div>
 
 	<div class="mt-16 flex justify-center">
-		<button class="btn btn-primary border-0 rounded-full px-6 text-white">About our stores</button>
+		<button class="btn btn-primary border-0 rounded-full px-6 text-white font-harmonia font-semibold">About our stores</button>
 	</div>
 </div>
 

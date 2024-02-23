@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    @font-face {
+        font-family: 'Harmonia';
+        src: url('/fonts/Harmonia-Sans-Font/Harmonia\ Sans\ W01\ Regular.ttf');
+        font-weight: normal;
+        font-display: swap;
+    }
+
+    @font-face {
+        font-family: 'Harmonia';
+        src: url('/fonts/Harmonia-Sans-Font/Harmonia\ Sans\ W01\ Bold.ttf');
+        font-weight: bold;
+        font-display: swap;
+    }
+
+    @font-face {
+        font-family: 'Frank Ruhl Libre';
+        src: url('/fonts/Frank_Ruhl_Libre/static/FrankRuhlLibre-Regular.ttf');
+        font-weight: normal;
+        font-display: swap;
+    }
+
+    @font-face {
+        font-family: 'Frank Ruhl Libre';
+        src: url('/fonts/Frank_Ruhl_Libre/static/FrankRuhlLibre-Bold.ttf');
+        font-weight: bold;
+        font-display: swap;
+    }
+}

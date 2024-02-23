@@ -11,8 +11,8 @@
 <div class="container mx-auto px-10 md:px-0">
 	<div class="flex justify-center">
 		<div class="text-center">
-			<div class="lg:text-6xl text-5xl text-primary font-semibold">Winter styles are here.</div>
-			<div class="lg:text-5xl text-4xl mt-4 text-primary font-normal">Discover the collection.</div>
+			<div class="md:text-6xl text-4xl text-primary font-semibold font-harmonia">Winter styles are here.</div>
+			<div class="md:text-6xl text-4xl font-normal font-frank mt-2 text-primary">Discover the collection.</div>
 		</div>
 	</div>
 	<div class="mt-16 flex justify-center">
@@ -26,7 +26,7 @@
 				/>
 
 				<div class="centered-text w-full">
-					<div class="lg:text-5xl md:text-4xl text-3xl font-bold">Women's Boots</div>
+					<div class="lg:text-5xl md:text-4xl text-3xl font-bold font-harmonia">Women's Boots</div>
 				</div>
 			</div>
 			<div class="relative w-full h-full">
@@ -36,7 +36,7 @@
 					alt="Shoes"
 				/>
 				<div class="centered-text w-full">
-					<div class="lg:text-5xl md:text-4xl text-3xl font-bold">Pre-Spring '24</div>
+					<div class="lg:text-5xl md:text-4xl text-3xl font-bold font-harmonia">Pre-Spring '24</div>
 				</div>
 			</div>
 		</div>
@@ -49,15 +49,15 @@
 			</div>
 			<div class="container-dev rounded-br-lg rounded-tr-lg p-20 flex items-center">
 				<div>
-					<div class="font-semibold description text-secondary">
+					<div class="font-semibold description text-secondary font-harmonia">
 						{description}
 					</div>
-					<div class="mt-4 font-semibold text-xs text-secondary">
+					<div class="mt-4 font-semibold text-xs text-secondary font-harmonia">
 						{sub_description}
 					</div>
 
 					<div class="mt-8">
-						<button class="btn btn-secondary border-0 rounded-full px-6 text-white">About Us</button
+						<button class="btn btn-secondary border-0 rounded-full px-6 text-white font-semibold font-harmonia">About Us</button
 						>
 					</div>
 				</div>

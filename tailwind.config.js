@@ -4,7 +4,9 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        harmonia: ['Harmonia, Arial, sans-serif']
+        kode: ['Kode Mono', 'monospace'],
+        harmonia: ['Harmonia'],
+        frank: ['Frank Ruhl Libre', 'serif'],
       }
     },
   },
@@ -35,6 +37,6 @@ export default {
 
     darkTheme: "mytheme", // name of one of the included themes for dark mode
   },
-  plugins: [require('daisyui')],
+  plugins: [require('@tailwindcss/typography'), require('daisyui')],
 }
 
