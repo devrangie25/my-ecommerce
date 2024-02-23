@@ -1,0 +1,17 @@
+@layer base {
+    @font-face {
+        font-family: 'Harmonia, Arial, sans-serif';
+        src: local('Harmonia Sans'), local('harmonia-sans'), local('harmonia sans'),
+            url('/static/fonts/harmonia/Harmonia\ Sans\ W01\ Regular.otf');
+        font-weight: normal;
+        font-display: swap;
+    }
+
+    @font-face {
+        font-family: 'Harmonia, Arial, sans-serif';
+        src: local('Harmonia Sans'), local('harmonia-sans'), local('harmonia sans'),
+            url('/static/fonts/harmonia/Harmonia\ Sans\ W01\ Bold.otf');
+        font-weight: bold;
+        font-display: swap;
+    }
+}
