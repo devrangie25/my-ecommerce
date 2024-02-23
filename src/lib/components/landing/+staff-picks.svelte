@@ -65,8 +65,8 @@
 <div class="container mx-auto px-10 md:px-0">
 	<div class="flex justify-center">
 		<div class="text-center">
-			<div class="lg:text-6xl text-5xl text-primary font-semibold">Staff Picks</div>
-			<div class="lg:text-5xl text-4xl mt-4 text-primary font-normal">Our current favourites</div>
+			<div class="md:text-6xl text-4xl text-primary font-semibold font-harmonia">Staff Picks</div>
+			<div class="md:text-6xl text-4xl mt-2 text-primary font-normal font-frank">Our current favourites</div>
 		</div>
 	</div>
 	<div class="mt-12 flex justify-center">

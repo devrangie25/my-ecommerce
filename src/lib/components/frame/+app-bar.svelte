@@ -18,7 +18,7 @@
 	];
 </script>
 
-<header class="navbar navbar-sticky bg-base-100 md:h-24">
+<header class="navbar navbar-sticky bg-base-100 md:h-24 font-harmonia">
 	<div class="navbar-start">
 		<div class="dropdown">
 			<div tabindex="0" role="button" class="btn btn-ghost btn-circle">
@@ -51,7 +51,7 @@
 		</div>
 		<div class="navs gap-8">
 			{#each main_navs as { title }, ind}
-				<div class={`uppercase font-harmonia font-bold ${ind < 1 ? 'ml-8' : ''}`}>
+				<div class={`uppercase font-bold ${ind < 1 ? 'ml-8' : ''}`}>
 					<span class="nav-title">
 						{title}
 					</span>
@@ -61,12 +61,12 @@
 	</div>
 	<div class="navbar-center">
 		<!-- svelte-ignore a11y-missing-attribute -->
-		<a class="btn btn-ghost text-xl uppercase tracking-widest text-primary font-semibold"
+		<a href="/shop" class="btn btn-ghost text-xl uppercase tracking-widest text-primary font-semibold"
 			>Sapatosan</a
 		>
 	</div>
 	<div class="navbar-end">
-		<div class="navs uppercase font-harmonia font-bold mr-8">
+		<div class="navs uppercase font-bold mr-8">
 			<span class="nav-title"> Stores </span>
 		</div>
 		<button class="btn btn-ghost btn-circle">

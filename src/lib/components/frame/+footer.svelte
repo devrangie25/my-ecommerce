@@ -92,7 +92,7 @@
 	];
 </script>
 
-<div class="bg-white md:p-12 p-6">
+<div class="bg-white md:p-12 p-6 font-harmonia">
 	<div class="md:mt-4 mt-6 grid grid-cols-1 md:grid-cols-3 gap-y-4 lg:gap-x-36 gap-x-10">
 		{#each supports as item}
 			<div class="md:mb-0 mb-4 flex items-start">
@@ -202,7 +202,7 @@
 	</div>
 </div>
 
-<footer class="footer md:px-10 px-6 py-4 h-44 bg-accent text-base-content">
+<footer class="footer md:px-10 px-6 py-4 h-44 bg-accent text-base-content font-harmonia">
 	<nav class="grid md:grid-flow-col md:gap-10 gap-4 uppercase">
 		<!-- svelte-ignore a11y-missing-attribute -->
 		<a class="link link-hover small-text-footer text-primary font-semibold">Credits</a>

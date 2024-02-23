@@ -40,7 +40,7 @@
 		<div class="grid lg:grid-cols-3 gap-10">
 			{#each pickImages as pick (pick.id)}
 				<!-- svelte-ignore a11y-no-static-element-interactions -->
-				<div class={`card card-compact rounded-none	w-full bg-white shadow-none`}>
+				<div class={`card card-compact rounded-none	w-full bg-white shadow-none font-harmonia`}>
 						<!-- svelte-ignore a11y-img-redundant-alt -->
 						<img src={pick.img} alt="Hovered Shoes" class="image" />
 					<div class="mt-2">
@@ -60,7 +60,7 @@
 		</div>
 
 		<div class="mt-24 text-center lg:px-52">
-			<div class="mb-16 text-secondary montreal-text md:text-4xl text-2xl font-semibold text-center">
+			<div class="mb-16 text-secondary montreal-text md:text-4xl text-2xl font-semibold text-center font-harmonia">
 				"This Montreal-based footwear and accessory brand is changing how you shop for shoes"
 			</div>
 
