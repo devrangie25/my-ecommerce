@@ -12,20 +12,22 @@
 
 <!-- First Image in Landing Page -->
 <div class="grid gap-y-28">
-	<div class="px-14 card img-container">
-		<figure>
-			<!-- svelte-ignore a11y-img-redundant-alt -->
-			<img class="rounded-xl landing-img" src={landingImage} alt="Landing Image Shoes" />
-		</figure>
+	<div class="md:px-14 card h-screen img-container">
+		<!-- svelte-ignore a11y-img-redundant-alt -->
+		<img
+			class="md:rounded-xl landing-img h-full object-cover"
+			src={landingImage}
+			alt="Landing Image Shoes"
+		/>
 
 		<div class="centered-text">
-			<div class="text-7xl landing-text uppercase font-bold">{landing_text}</div>
-			<div class="mt-8 text-5xl landing_sub_text uppercase">
+			<div class="lg:text-7xl text-6xl landing-text uppercase font-bold">{landing_text}</div>
+			<div class="mt-8 lg:text-5xl text-4xl landing_sub_text uppercase">
 				{landing_sub_text}
 			</div>
 			<div class="mt-6">
 				<button
-					class="btn bg-white border-0 rounded-full w-32 shop-now-btn hover:bg-primary hover:text-white"
+					class="btn bg-white border-0 rounded-full px-6 shop-now-btn hover:bg-primary hover:text-white"
 				>
 					Shop Now</button
 				>
@@ -34,13 +36,13 @@
 	</div>
 
 	<!-- Second Image in Landing Page -->
-	<div class="px-14 grid grid-cols-2 gap-x-10">
-		<div class="flex justify-center items-center">
+	<div class="md:px-14 px-6 grid md:grid-cols-2 gap-x-10">
+		<div class="md:order-first order-last md:mt-0 mt-12 flex justify-center items-center">
 			<div class="text-center">
-				<div class="font-semibold text-primary text-6xl mb-4">The 24/7 Trainer</div>
-				<div class="text-primary text-5xl">Meet Rangie.</div>
-				<div class="mt-12">
-					<button class="btn btn-primary border-0 rounded-full w-32 text-white">Shop Now</button>
+				<div class="font-semibold text-primary xl:text-6xl lg:text-5xl text-4xl mb-4">The 24/7 Trainer</div>
+				<div class="text-primary xl:text-5xl lg:text-4xl text-3xl">Meet Rangie.</div>
+				<div class="lg:mt-12 mt-6">
+					<button class="btn btn-primary border-0 rounded-full px-6 text-white">Shop Now</button>
 				</div>
 			</div>
 		</div>
@@ -60,8 +62,13 @@
 </div>
 
 <style>
+	.order-last-sm {
+		@apply md:order-last;
+	}
+
 	button {
 		height: 56px;
+		font-size: 16px;
 	}
 	.shop-now-btn {
 		font-size: 16px;

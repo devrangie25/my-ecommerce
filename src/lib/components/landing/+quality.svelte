@@ -36,15 +36,13 @@
 </script>
 
 <div class="bg-white py-16">
-	<div class="mt-16 container mx-auto">
-		<div class="grid grid-cols-3 gap-10">
+	<div class="mt-16 container mx-auto px-10 md:px-0">
+		<div class="grid lg:grid-cols-3 gap-10">
 			{#each pickImages as pick (pick.id)}
 				<!-- svelte-ignore a11y-no-static-element-interactions -->
 				<div class={`card card-compact rounded-none	w-full bg-white shadow-none`}>
-					<figure>
 						<!-- svelte-ignore a11y-img-redundant-alt -->
 						<img src={pick.img} alt="Hovered Shoes" class="image" />
-					</figure>
 					<div class="mt-2">
 						<div class="flex justify-between font-semibold mb-2">
 							<span class="text-secondary text-2xl">
@@ -61,14 +59,16 @@
 			{/each}
 		</div>
 
-		<div class="mt-24 text-center px-52">
-			<div class="mb-16 text-secondary montreal-text font-semibold text-center">
+		<div class="mt-24 text-center lg:px-52">
+			<div class="mb-16 text-secondary montreal-text md:text-4xl text-2xl font-semibold text-center">
 				"This Montreal-based footwear and accessory brand is changing how you shop for shoes"
 			</div>
 
-			<div class="px-16 flex items-center justify-between">
+			<div class="grid grid-cols-2 md:grid-cols-4">
 				{#each brands as img }
-					<img src={img} alt={img} width="120"/>
+					<div class="flex justify-center items-center">
+						<img src={img} alt={img} width="120" class="md:h-max"/>
+					</div>
 				{/each}
 			</div>
 		</div>
@@ -77,12 +77,10 @@
 
 <style>
 	.montreal-text {
-		font-size: 40px;
 		line-height: 48px;
 	}
 	.image {
 		object-fit: cover;
-		width: 506px;
 		height: 600px;
 		transition: transform 0.1s ease-in-out;
 	}

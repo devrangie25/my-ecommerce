@@ -8,43 +8,44 @@
 	let sub_description = `Dev Rangie & Director Rangie, founders.`;
 </script>
 
-<div class="container mx-auto">
+<div class="container mx-auto px-10 md:px-0">
 	<div class="flex justify-center">
 		<div class="text-center">
-			<div class="text-6xl text-primary font-semibold">Winter styles are here.</div>
-			<div class="text-5xl mt-4 text-primary font-normal">Discover the collection.</div>
+			<div class="lg:text-6xl text-5xl text-primary font-semibold">Winter styles are here.</div>
+			<div class="lg:text-5xl text-4xl mt-4 text-primary font-normal">Discover the collection.</div>
 		</div>
 	</div>
 	<div class="mt-16 flex justify-center">
-		<div class="grid grid-cols-2 gap-x-10">
-			<div class="img-container">
+		<div class="grid md:grid-cols-2 grid-cols-1 gap-x-10 md:gap-y-0 gap-y-10">
+			<div class="relative w-full h-full">
 				<img
-					class="w-full rounded-lg my-img hover:scale-110 transition duration-1000 cursor-pointer object-cover"
+					class="w-full img-default rounded-lg hover:scale-110 transition duration-1000 cursor-pointer object-cover"
+					height="780"
 					src={collection1}
 					alt="Shoes"
 				/>
 
 				<div class="centered-text w-full">
-					<div class="text-5xl font-bold">Women's Boots</div>
+					<div class="lg:text-5xl md:text-4xl text-3xl font-bold">Women's Boots</div>
 				</div>
 			</div>
-			<div class="img-container">
+			<div class="relative w-full h-full">
 				<img
-					class="w-full rounded-lg my-img hover:scale-110 transition duration-1000 cursor-pointer object-cover"
+					class="w-full img-default rounded-lg hover:scale-110 transition duration-1000 cursor-pointer object-cover"
 					src={collection2}
 					alt="Shoes"
 				/>
 				<div class="centered-text w-full">
-					<div class="text-5xl font-bold">Pre-Spring '24</div>
+					<div class="lg:text-5xl md:text-4xl text-3xl font-bold">Pre-Spring '24</div>
 				</div>
 			</div>
 		</div>
 	</div>
 
 	<div class="mt-28 flex justify-center">
-		<div class="grid grid-cols-2">
-			<div dir="ltr">
-				<img class="rounded-s-lg" src={founders} alt="Shoes" />
+		<div class="grid md:grid-cols-2">
+			<div dir="ltr" class="h-full">
+				<img class="img-default rounded-s-lg w-full object-cover" src={founders} alt="Shoes" />
 			</div>
 			<div class="container-dev rounded-br-lg rounded-tr-lg p-20 flex items-center">
 				<div>
@@ -56,7 +57,7 @@
 					</div>
 
 					<div class="mt-8">
-						<button class="btn btn-secondary border-0 rounded-full w-28 text-white">About Us</button
+						<button class="btn btn-secondary border-0 rounded-full px-6 text-white">About Us</button
 						>
 					</div>
 				</div>
@@ -68,24 +69,17 @@
 <style>
 	button {
 		height: 56px;
+		font-size: 16px;
 	}
-	img {
-		height: 780px;
-		width: 780px;
-		object-fit: cover;
-	}
-
 	.description {
 		font-size: 40px;
 		line-height: 48px;
 	}
-
 	.container-dev {
 		background-color: #ccd3e3;
 	}
-
-	.img-container {
-		position: relative;
+	.img-default  {
+		height: 780px;
 	}
 	.centered-text {
 		position: absolute;

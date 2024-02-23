@@ -62,19 +62,19 @@
 	});
 </script>
 
-<div class="container mx-auto">
+<div class="container mx-auto px-10 md:px-0">
 	<div class="flex justify-center">
 		<div class="text-center">
-			<div class="text-6xl text-primary font-semibold">Staff Picks</div>
-			<div class="text-5xl mt-4 text-primary font-normal">Our current favourites</div>
+			<div class="lg:text-6xl text-5xl text-primary font-semibold">Staff Picks</div>
+			<div class="lg:text-5xl text-4xl mt-4 text-primary font-normal">Our current favourites</div>
 		</div>
 	</div>
-	<div class="mt-16 flex justify-center">
-		<div class="grid grid-cols-4 gap-10">
+	<div class="mt-12 flex justify-center">
+		<div class="grid lg:grid-cols-4 grid-cols-2 gap-10">
 			{#each pickImages as pick (pick.id)}
 				<!-- svelte-ignore a11y-no-static-element-interactions -->
 				<div
-					class={`card card-compact rounded-lg w-full bg-base-100 shadow-none`}
+					class={`card card-compact rounded-lg w-full md:h-full bg-base-100 shadow-none`}
 					on:mouseenter={() => handleHover(pick.id)}
 					on:mouseleave={() => handleHover(null)}
 				>
@@ -109,7 +109,7 @@
 	.image {
 		object-fit: cover;
 		width: 100%;
-        height: 512px;
+        height: 100%;
 		transition: transform 0.1s ease-in-out;
 	}
 </style>

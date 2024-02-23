@@ -18,22 +18,55 @@
 	];
 </script>
 
-<div class="navbar navbar-sticky bg-base-100 h-24">
-	<div class="navbar-start gap-8">
-		{#each main_navs as { title }, ind}
-			<div class={`uppercase font-harmonia font-bold ${ind < 1 ? 'ml-8' : ''}`}>
-				<span class="nav-title">
-					{title}
-				</span>
+<header class="navbar navbar-sticky bg-base-100 md:h-24">
+	<div class="navbar-start">
+		<div class="dropdown">
+			<div tabindex="0" role="button" class="btn btn-ghost btn-circle">
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					class="h-5 w-5"
+					fill="none"
+					viewBox="0 0 24 24"
+					stroke="currentColor"
+					><path
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						stroke-width="2"
+						d="M4 6h16M4 12h16M4 18h7"
+					/></svg
+				>
 			</div>
-		{/each}
+			<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
+			<ul
+				tabindex="0"
+				class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+			>
+				<!-- svelte-ignore a11y-missing-attribute -->
+				<li><a>Homepage</a></li>
+				<!-- svelte-ignore a11y-missing-attribute -->
+				<li><a>Portfolio</a></li>
+				<!-- svelte-ignore a11y-missing-attribute -->
+				<li><a>About</a></li>
+			</ul>
+		</div>
+		<div class="navs gap-8">
+			{#each main_navs as { title }, ind}
+				<div class={`uppercase font-harmonia font-bold ${ind < 1 ? 'ml-8' : ''}`}>
+					<span class="nav-title">
+						{title}
+					</span>
+				</div>
+			{/each}
+		</div>
 	</div>
 	<div class="navbar-center">
 		<!-- svelte-ignore a11y-missing-attribute -->
-		<a class="btn btn-ghost text-xl uppercase tracking-widest text-primary font-semibold">Sapatosan</a>
+		<a class="btn btn-ghost text-xl uppercase tracking-widest text-primary font-semibold"
+			>Sapatosan</a
+		>
 	</div>
 	<div class="navbar-end">
-		<div class="uppercase font-harmonia font-bold mr-8">
+		<div class="navs uppercase font-harmonia font-bold mr-8">
 			<span class="nav-title"> Stores </span>
 		</div>
 		<button class="btn btn-ghost btn-circle">
@@ -72,9 +105,15 @@
 			</div>
 		</button>
 	</div>
-</div>
+</header>
 
 <style>
+	.navs {
+		@apply hidden lg:flex;
+	}
+	.dropdown {
+		@apply lg:hidden;
+	}
 	.navbar-sticky {
 		position: sticky;
 		top: 0;
