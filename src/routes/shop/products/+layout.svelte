@@ -4,6 +4,6 @@
     export let data: LayoutData;
 </script>
 
-<div class="container mx-auto">
+<div class="container mx-auto py-24">
     <slot />
 </div>

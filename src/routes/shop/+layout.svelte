@@ -3,7 +3,7 @@
 	import Footer from '$lib/components/frame/+footer.svelte';
 </script>
 
-<div class="min-h-screen flex flex-col">
+<div>
 	<AppBar />
 	<main class="flex-grow">
 		<slot />
