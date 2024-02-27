@@ -19,7 +19,7 @@
 	];
 
 	const navigateToHome = () => {
-		goto('/shop');
+		goto('/');
 	};
 </script>
 

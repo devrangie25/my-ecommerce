@@ -18,6 +18,6 @@ export const actions = {
                 message: JSON.parse(JSON.stringify(error))
             }
         }
-        throw redirect(303, '/shop')
+        throw redirect(303, '/')
     }
 }
