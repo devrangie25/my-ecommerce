@@ -11,7 +11,7 @@ export const actions = {
         const data = Object.fromEntries([...formData])
         try {
             // Create new User
-            await locals.pb.collection('users').create(data)
+            await locals.pb.collection('customers').create(data)
         } catch (error: any) {
             console.log('Error Occured in Register', JSON.parse(JSON.stringify(error)))
             return {

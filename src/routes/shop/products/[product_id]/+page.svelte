@@ -23,6 +23,7 @@
 					<img
 						src={`http://127.0.0.1:8090/api/files/${currentProduct.collectionName}/${currentProduct.id}/${product_img}`}
 						alt={`produc-image-${ind}`}
+						class="product-img"
 					/>
 				</div>
 			{/each}
@@ -199,6 +200,9 @@
 </div>
 
 <style>
+	.product-img {
+		height: 668px;
+	}
 	.badge {
 		background-color: #b2fce4;
 	}

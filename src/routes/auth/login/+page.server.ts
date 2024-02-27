@@ -10,7 +10,7 @@ export const actions = {
         const formData = await request.formData()
         const data = Object.fromEntries([...formData])
         try {
-            await locals.pb.collection('users').authWithPassword(data.email, data.password)
+            await locals.pb.collection('customers').authWithPassword(data.email, data.password)
         } catch (error: any) {
             console.log('Error Occured in Login',  JSON.parse(JSON.stringify(error)))
             return {
