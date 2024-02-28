@@ -1,8 +1,6 @@
 <script lang="ts">
 	import cartStore from '$lib/stores/cart';
 
-	export let data;
-
 	let cart: any = [];
 	let subtotal: number = 0;
 

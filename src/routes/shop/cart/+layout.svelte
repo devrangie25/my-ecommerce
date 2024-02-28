@@ -1,10 +1,7 @@
 <script lang="ts">
-	import type { LayoutData } from './$types';
 	import { goto } from '$app/navigation';
-
 	import cartStore from '$lib/stores/cart';
 
-	export let data: LayoutData;
 	let cart: any = [];
 
 	$: {
