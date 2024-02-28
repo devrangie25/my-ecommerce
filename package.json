@@ -36,6 +36,8 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"@tailwindcss/typography": "^0.5.10"
+		"@tailwindcss/typography": "^0.5.10",
+		"pocketbase": "^0.21.1",
+		"svelte-icons": "^2.1.0"
 	}
 }
