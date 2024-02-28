@@ -1,7 +1,8 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import SideDrawer from '$lib/components/frame/+side-drawer.svelte';
 	import cartStore from '$lib/stores/cart';
+	import SideDrawer from '$lib/components/frame/+side-drawer.svelte';
+	import Alert from '$lib/components/products/+alert.svelte';
 	import { onMount } from 'svelte';
 
 	export let data: any;
@@ -9,6 +10,7 @@
 	let cart: any = [];
 	let currentProduct: any = data.pb_product_by_id;
 	let products: any = data.pb_products;
+	let isAddedToCart: boolean = false;
 	let isDrawerOpen = false;
 	let productCartForm: any = {
 		product_id: null,
@@ -35,6 +37,10 @@
 	onMount(() => {
 		products = localStorage.getItem('products');
 		products = JSON.parse(products);
+
+		if (currentProduct) {
+			productCartForm.color = currentProduct.color;
+		}
 	});
 
 	// const getSingleProductByColorPb = async (color: string, brand: string, category: string) => {
@@ -118,25 +124,34 @@
 	};
 
 	const handleAddToCart = () => {
-		productCartForm.date_added = new Date();
-		productCartForm.product_id = currentProduct.id;
-		productCartForm.product = currentProduct;
-		productCartForm.price = currentProduct.price;
-		productCartForm.quantity = 1;
-		const hasNull = hasNullValue(productCartForm);
-		if (!hasNull) {
-			let updatedCart = addToCart(cart, productCartForm);
+		if (!productCartForm.size) {
+			isDrawerOpen = true;
+		} else {
+			productCartForm.date_added = new Date();
+			productCartForm.product_id = currentProduct.id;
+			productCartForm.product = currentProduct;
+			productCartForm.price = currentProduct.price;
+			productCartForm.quantity = 1;
+			const hasNull = hasNullValue(productCartForm);
+			if (!hasNull) {
+				let updatedCart = addToCart(cart, productCartForm);
 
-			updatedCart = updatedCart.map((cartItem: any) => {
-				return {
-					...cartItem,
-					subtotal: cartItem.quantity * convertStringToNumber(cartItem.price)
-				};
-			});
+				updatedCart = updatedCart.map((cartItem: any) => {
+					return {
+						...cartItem,
+						subtotal: cartItem.quantity * convertStringToNumber(cartItem.price)
+					};
+				});
 
-			cartStore.update(() => {
-				return [...updatedCart];
-			});
+				cartStore.update(() => {
+					return [...updatedCart];
+				});
+
+				isAddedToCart = true;
+				setTimeout(() => {
+					isAddedToCart = false;
+				}, 3000);
+			}
 		}
 	};
 
@@ -145,22 +160,29 @@
 	};
 </script>
 
-<div class="flex mb-12">
-	<button class="flex items-center" on:click={handleNavClick}>
-		<svg
-			xmlns="http://www.w3.org/2000/svg"
-			fill="none"
-			viewBox="0 0 24 24"
-			stroke-width="3"
-			stroke="#a36448"
-			class="w-4 h-4"
-		>
-			<path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
-		</svg>
-		<div class="ml-2 font-harmonia font-medium text-2xl hover:text-secondary">
-			Continue shopping
+<div class="flex mb-8 items-center justify-between">
+	<div>
+		<button class="flex items-center" on:click={handleNavClick}>
+			<svg
+				xmlns="http://www.w3.org/2000/svg"
+				fill="none"
+				viewBox="0 0 24 24"
+				stroke-width="3"
+				stroke="#a36448"
+				class="w-4 h-4"
+			>
+				<path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+			</svg>
+			<div class="ml-2 font-harmonia font-medium text-2xl hover:text-secondary">
+				Continue shopping
+			</div>
+		</button>
+	</div>
+	{#if isAddedToCart}
+		<div class="flex justify-end">
+			<Alert msg={`Successfully added to cart`} width="w-96" />
 		</div>
-	</button>
+	{/if}
 </div>
 <div class="px-4 md:px-0 grid grid-cols-3 gap-4">
 	<div class="col-span-2">

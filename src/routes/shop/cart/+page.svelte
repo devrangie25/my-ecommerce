@@ -1,5 +1,6 @@
 <script lang="ts">
 	import cartStore from '$lib/stores/cart';
+	import { goto } from '$app/navigation';
 
 	let cart: any = [];
 	let subtotal: number = 0;
@@ -78,6 +79,10 @@
 			});
 		}
 	};
+
+	const handleNavToCheckOut = () => {
+		goto('/shop/checkout')
+	} 
 </script>
 
 <div>
@@ -199,9 +204,10 @@
 					</div>
 					<div class="divider my-4 px-14"></div>
 
-					<div class="px-24 mb-4">
+					<div class="xl:px-24 md:px-12 mb-4">
 						<button
-							class="btn btn-secondary btn-block h-24 btn-circle text-2xl font-semibold text-white"
+							class="btn btn-secondary btn-block h-24 btn-circle text-2xl font-semibold text-white "
+							on:click={handleNavToCheckOut}
 							>Continue to checkout</button
 						>
 					</div>

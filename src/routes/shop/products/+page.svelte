@@ -99,18 +99,11 @@
 	];
 
 	let shoeStyles = [
-		{ title: 'Boots', checked: false },
-		{ title: 'Fisherman', checked: false },
-		{ title: 'Flats', checked: false },
-		{ title: 'Heels', checked: false },
-		{ title: 'Insulated', checked: false },
+		{ title: 'Ballerina', checked: false },
 		{ title: 'Maryjane', checked: false },
-		{ title: 'Mules', checked: false },
 		{ title: 'Oxford', checked: false },
-		{ title: 'Pumps', checked: false },
-		{ title: 'Sandals', checked: false },
 		{ title: 'Sneakers', checked: false },
-		{ title: 'Wedge', checked: false }
+		{ title: 'Loafer', checked: false },
 	];
 
 	let hoveredImage: number | null = null;
