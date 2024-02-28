@@ -1,10 +1,20 @@
 <script lang="ts">
-	import { goto } from "$app/navigation";
+	import { browser } from "$app/environment";
+	import { goto } from '$app/navigation';
 	import { onMount } from 'svelte';
+	import productsStore from '$lib/stores/products';
 
 	import Dropdown from '$lib/components/products/+dropdown.svelte';
 
 	export let data: any;
+
+	$: {
+		productsStore.subscribe((value: any) => {
+			if (browser) {
+				localStorage.setItem('products', JSON.stringify(value))
+			}
+		});
+	}
 
 	let products: Array<any> = [];
 	let controllers: Array<any> = [
@@ -107,12 +117,14 @@
 
 	onMount(() => {
 		products = [...data.pb_products];
-		console.log('products', products);
+		productsStore.update(() => {
+			return [...products];
+		});
 		hoveredImage = null;
 	});
 
 	const handleClickProduct = (productId: any) => {
-		goto(`/shop/products/${productId}`)
+		goto(`/shop/products/${productId}`);
 	};
 
 	const handleHover = (id: any) => {

@@ -1,32 +1,181 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
+	import { goto } from '$app/navigation';
 	import SideDrawer from '$lib/components/frame/+side-drawer.svelte';
+	import cartStore from '$lib/stores/cart';
+	import { onMount } from 'svelte';
 
 	export let data: any;
 
+	let cart: any = [];
 	let currentProduct: any = data.pb_product_by_id;
-
+	let products: any = data.pb_products;
 	let isDrawerOpen = false;
+	let productCartForm: any = {
+		product_id: null,
+		product: null,
+		date_added: null,
+		size: null,
+		color: null,
+		price: 0,
+		quantity: 0
+	};
 
-	console.log({ currentProduct });
+	$: {
+		if (productCartForm.color !== null) {
+			getSingleProductByColor(productCartForm.color, currentProduct.brand, currentProduct.style);
+		}
+	}
+
+	$: {
+		cartStore.subscribe((value: any) => {
+			cart = value;
+		});
+	}
+
+	onMount(() => {
+		products = localStorage.getItem('products');
+		products = JSON.parse(products);
+	});
+
+	// const getSingleProductByColorPb = async (color: string, brand: string, category: string) => {
+	// 	try {
+	// 		const record: any = await pb
+	// 			.collection('products')
+	// 			.getFirstListItem(`color='${color}' && brand='${brand}' && category='${category}'`);
+	// 		currentProduct = record;
+	// 	} catch (error) {
+	// 		console.error('error', error);
+	// 	}
+	// };
+
+	const getSingleProductByColor = (color: string, brand: string, style: string) => {
+		if (products.length > 0) {
+			const product = products.filter(
+				(item: any) => item.color === color && item.brand === brand && item.style === style
+			);
+			currentProduct = product[0];
+		}
+	};
 
 	const handleDrawerEvent = (event: any) => {
 		isDrawerOpen = event.detail.open;
 	};
+
+	const hasNullValue = (obj: any) => {
+		for (const value of Object.values(obj)) {
+			if (value === null) {
+				return true;
+			}
+		}
+		return false;
+	};
+
+	const handleSelectSize = (selectedSize: number) => {
+		productCartForm.size = selectedSize;
+		isDrawerOpen = false;
+	};
+
+	const addToCart = (cart: any, newItem: any) => {
+		// Find index of item with matching id, color, and size in the cart
+		const index = cart.findIndex(
+			(item: any) =>
+				item.product_id === newItem.product_id &&
+				item.color === newItem.color &&
+				item.size === newItem.size
+		);
+
+		if (index !== -1) {
+			// If item exists in the cart, update the quantity
+			cart[index].quantity += newItem.quantity;
+		} else {
+			// If item does not exist in the cart, add it
+			cart.push({
+				product_id: newItem.product_id,
+				product: newItem.product,
+				color: newItem.color,
+				price: newItem.price,
+				size: newItem.size,
+				quantity: newItem.quantity
+			});
+		}
+
+		// Filter out items with quantity less than or equal to 0, this is optional since all quantity is default to 1 when added to cart
+		cart = cart.filter((item: any) => item.quantity > 0);
+
+		return cart;
+	};
+
+	const convertStringToNumber = (str: string) => {
+		// Remove commas if present and convert to number
+		const numberValue = parseFloat(str.replace(/,/g, ''));
+
+		// Check if the conversion was successful
+		if (isNaN(numberValue)) {
+			throw new Error('Invalid number format');
+		}
+
+		return numberValue;
+	};
+
+	const handleAddToCart = () => {
+		productCartForm.date_added = new Date();
+		productCartForm.product_id = currentProduct.id;
+		productCartForm.product = currentProduct;
+		productCartForm.price = currentProduct.price;
+		productCartForm.quantity = 1;
+		const hasNull = hasNullValue(productCartForm);
+		if (!hasNull) {
+			let updatedCart = addToCart(cart, productCartForm);
+
+			updatedCart = updatedCart.map((cartItem: any) => {
+				return {
+					...cartItem,
+					subtotal: cartItem.quantity * convertStringToNumber(cartItem.price)
+				};
+			});
+
+			cartStore.update(() => {
+				return [...updatedCart];
+			});
+		}
+	};
+
+	const handleNavClick = () => {
+		goto('/shop/products');
+	};
 </script>
 
+<div class="flex mb-12">
+	<button class="flex items-center" on:click={handleNavClick}>
+		<svg
+			xmlns="http://www.w3.org/2000/svg"
+			fill="none"
+			viewBox="0 0 24 24"
+			stroke-width="3"
+			stroke="#a36448"
+			class="w-4 h-4"
+		>
+			<path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+		</svg>
+		<div class="ml-2 font-harmonia font-medium text-2xl hover:text-secondary">
+			Continue shopping
+		</div>
+	</button>
+</div>
 <div class="px-4 md:px-0 grid grid-cols-3 gap-4">
 	<div class="col-span-2">
 		<div class="grid grid-cols-2 gap-4">
-			{#each currentProduct.product_images as product_img, ind}
-				<div class="card">
-					<img
-						src={`http://127.0.0.1:8090/api/files/${currentProduct.collectionName}/${currentProduct.id}/${product_img}`}
-						alt={`produc-image-${ind}`}
-						class="product-img"
-					/>
-				</div>
-			{/each}
+			{#if currentProduct?.product_images.length > 0}
+				{#each currentProduct.product_images as product_img, ind}
+					<div class="card">
+						<img
+							src={`http://127.0.0.1:8090/api/files/${currentProduct.collectionName}/${currentProduct.id}/${product_img}`}
+							alt={`produc-image-${ind}`}
+							class="product-img"
+						/>
+					</div>
+				{/each}
+			{/if}
 		</div>
 	</div>
 	<div class="col-span-1 p-4">
@@ -67,11 +216,23 @@
 
 		<div class="mb-4">
 			<div class="font-frank text-2xl font-medium mb-2">Colors</div>
-			<div class="flex gap-x-2">
-				<button class="btn-circle bg-black btn-sm"></button>
-				<button class="btn-circle bg-warning btn-sm"></button>
-				<button class="btn-circle bg-info btn-sm"></button>
-			</div>
+			{#if currentProduct.colors}
+				<div class="join gap-x-2">
+					{#each currentProduct.colors as color, ind}
+						<div class="form-control">
+							<input
+								type="radio"
+								name="radio-color"
+								class="radio radio-lg"
+								checked
+								value={color.title}
+								bind:group={productCartForm.color}
+								style={`background-color: ${color.color}; border-radius: 50%;`}
+							/>
+						</div>
+					{/each}
+				</div>
+			{/if}
 		</div>
 
 		<div class="divider my-6"></div>
@@ -85,9 +246,21 @@
 			<div>
 				<button
 					on:click={() => (isDrawerOpen = !isDrawerOpen)}
-					class="btn btn-block bg-white rounded-lg border-0 hover:bg-accent font-sans font-semibold text-lg h-14 flex justify-between px-6"
+					class={`btn btn-block bg-white rounded-lg border-0 hover:bg-accent font-sans font-semibold text-lg  flex justify-between px-6 ${productCartForm.size ? 'items-center h-20' : 'h-14'}`}
 				>
-					Choose a size
+					{#if productCartForm.size}
+						<div>
+							<div class="text-black text-xl -ml-8">
+								{productCartForm.size}
+							</div>
+							<div class="-mt-2">
+								<button class="btn-circle circle"></button>
+								<span class="text-slate-400 text-xs"> In stock </span>
+							</div>
+						</div>
+					{:else}
+						Choose a size
+					{/if}
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
 						fill="none"
@@ -107,7 +280,8 @@
 		<div class="mb-4">
 			<div class="mb-4">
 				<button
-					class="btn btn-secondary btn-block h-16 btn-circle font-harmonia font-semibold text-xl"
+					on:click={handleAddToCart}
+					class="btn btn-secondary btn-block h-16 btn-circle font-harmonia font-semibold text-xl hover:bg-neutral"
 					>Add to cart - ₱{currentProduct.price}</button
 				>
 			</div>
@@ -196,7 +370,50 @@
 		</div>
 	</div>
 
-	<SideDrawer isOpen={isDrawerOpen} on:drawer={handleDrawerEvent} />
+	<SideDrawer padding="p-0" width="w-1/4" isOpen={isDrawerOpen} on:drawer={handleDrawerEvent}>
+		<div class="navbar bg-info px-6 h-20">
+			<div class="flex-1">
+				<span class="text-2xl font-semibold font-harmonia">Choose a size</span>
+			</div>
+			<div class="flex-none">
+				<button class="btn btn-square btn-ghost" on:click={() => (isDrawerOpen = false)}>
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						fill="none"
+						viewBox="0 0 24 24"
+						stroke-width="1.5"
+						stroke="currentColor"
+						class="w-6 h-6"
+					>
+						<path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+					</svg>
+				</button>
+			</div>
+		</div>
+
+		<div class="p-6">
+			{#if currentProduct.sizes}
+				<div class="join join-vertical w-full">
+					{#each currentProduct.sizes as size}
+						<button
+							class="btn btn-outline btn-info rounded-xl join-item flex items-center justify-start h-20"
+							on:click={() => handleSelectSize(size)}
+						>
+							<div>
+								<div class="text-black text-lg -ml-8">
+									{size}
+								</div>
+								<div>
+									<button class="btn-circle circle"></button>
+									<span class="text-slate-400 text-xs"> In stock </span>
+								</div>
+							</div>
+						</button>
+					{/each}
+				</div>
+			{/if}
+		</div>
+	</SideDrawer>
 </div>
 
 <style>
@@ -205,5 +422,13 @@
 	}
 	.badge {
 		background-color: #b2fce4;
+	}
+	.side-bar-header {
+		background-color: rgba(244, 230, 217);
+	}
+	.circle {
+		width: 5px;
+		height: 5px;
+		background-color: #5cb85c;
 	}
 </style>

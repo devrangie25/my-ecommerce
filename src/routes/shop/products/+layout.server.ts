@@ -1,5 +1,5 @@
+import type { LayoutServerLoad } from './$types';
 import { error } from '@sveltejs/kit';
-import type { PageServerLoad } from './$types';
 
 export const load = (async ({ locals }: any) => {
 
@@ -18,4 +18,4 @@ export const load = (async ({ locals }: any) => {
         pb_products: await fetchAllProducts()
     };
 
-}) satisfies PageServerLoad;
+}) satisfies LayoutServerLoad;

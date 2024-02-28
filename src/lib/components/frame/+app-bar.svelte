@@ -21,6 +21,10 @@
 	const navigateToHome = () => {
 		goto('/');
 	};
+
+	const gotoCardPage = () => {
+		goto('/shop/cart');
+	}
 </script>
 
 <div class="drawer">
@@ -133,7 +137,7 @@
 						/></svg
 					>
 				</button>
-				<button class="btn btn-ghost btn-circle">
+				<button class="btn btn-ghost btn-circle" on:click={gotoCardPage}>
 					<div class="indicator">
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
