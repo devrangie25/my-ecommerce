@@ -17,11 +17,11 @@
 	</div>
 	<div class="logout">
 		{#if currentUser}
-			<a href="/auth/logout" class="uppercase font-harmonia text-xs font-semibold text-white">
+			<a href="/logout" class="uppercase font-harmonia text-xs font-semibold text-white">
 				Log Out
 			</a>
 		{:else}
-			<a href="/auth/login" class="uppercase font-harmonia text-xs font-semibold text-white">
+			<a href="/login" class="uppercase font-harmonia text-xs font-semibold text-white">
 				Log In
 			</a>
 		{/if}

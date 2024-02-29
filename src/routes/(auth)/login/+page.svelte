@@ -11,7 +11,7 @@
 		Sign in to your account
 	</h2>
 	<p class="text-center mt-1">
-		Or <a href="/auth/register" class="text-primary font-medium hover:cursor-pointer">register</a> if
+		Or <a href="/register" class="text-primary font-medium hover:cursor-pointer">register</a> if
 		you don't already have an account.
 	</p>
 	<div class="bg-white py-6 pb-8 shadow-md rounded-lg w-full max-w-sm mt-6">
