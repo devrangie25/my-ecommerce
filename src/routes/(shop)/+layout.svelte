@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { PageData } from './$types';
 	import 'tailwindcss/tailwind.css';
-	import '../app.css';
+	import '../../app.css';
 	import AppBar from '$lib/components/frame/+app-bar.svelte';
 	import Footer from '$lib/components/frame/+footer.svelte';
 	import SystemBar from '$lib/components/frame/+system-bar.svelte';
