@@ -4,7 +4,7 @@
     export let width: string = 'w-1/2'
 </script>
 
-<div role="alert" class={`alert bg-${bg} text-white ${width} items-end rounded-lg`}>
+<div role="alert" class={`alert bg-secondary text-white ${width} items-end rounded-lg`}>
 	<svg
 		xmlns="http://www.w3.org/2000/svg"
 		class="stroke-current shrink-0 h-6 w-6"

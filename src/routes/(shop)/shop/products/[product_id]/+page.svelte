@@ -180,7 +180,7 @@
 	</div>
 	{#if isAddedToCart}
 		<div class="flex justify-end">
-			<Alert msg={`Successfully added to cart`} width="w-96" />
+			<Alert msg={`Successfully added to cart`} width="w-96" bg="primary" />
 		</div>
 	{/if}
 </div>

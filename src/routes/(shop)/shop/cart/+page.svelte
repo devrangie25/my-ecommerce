@@ -81,8 +81,19 @@
 	};
 
 	const handleNavToCheckOut = () => {
-		goto('/shop/checkout')
-	} 
+		goto('/checkout')
+	}
+
+	const handleCheckoutItems = () => {
+		/**
+		
+			checkoutObj = {
+				products: [],
+				subtotal: 0,
+			}
+		 
+		*/
+	}
 </script>
 
 <div>
