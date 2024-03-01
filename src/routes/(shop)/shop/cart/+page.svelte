@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
 	import cartStore from '$lib/stores/cart';
 	import checkoutStore from '$lib/stores/checkout';
 	import { goto } from '$app/navigation';

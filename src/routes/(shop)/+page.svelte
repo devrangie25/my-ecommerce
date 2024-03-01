@@ -6,9 +6,19 @@
 	import Collection from '$lib/components/landing/+collection.svelte';
 	import Quality from '$lib/components/landing/+quality.svelte';
 	import Stores from '$lib/components/landing/+stores.svelte';
+	import checkoutStore from '$lib/stores/checkout';
+
+	export let data;
 
 	let landing_text = 'Spring Staples';
 	let landing_sub_text = 'The Neiva Mary Jane';
+
+	$: {
+		checkoutStore.subscribe((value: any) => {
+			console.log('Checkout Store in Landing Page', value);
+			console.log('Landing Page', data)
+		});
+	}
 
 	const goToProductsPage = () => {
 		goto(`shop/products`);
