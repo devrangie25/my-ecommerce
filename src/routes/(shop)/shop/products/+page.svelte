@@ -242,7 +242,7 @@
 								<div on:click={() => handleClickProduct(product.id)} class="card w-full rounded-lg">
 									<figure>
 										<img
-											src={`http://127.0.0.1:8090/api/files/${product.collectionName}/${product.id}/${product.product_img}`}
+											src={`${data.APP_ENVIRONMENT}/api/files/${product.collectionName}/${product.id}/${product.product_img}`}
 											alt={product.title}
 											class="image rounded-lg product-img"
 											loading="lazy"
@@ -275,7 +275,7 @@
 									<figure>
 										{#if hoveredImage === product.id}
 											<img
-												src={`http://127.0.0.1:8090/api/files/${product.collectionName}/${product.id}/${product.product_hovered_img}`}
+												src={`${data.APP_ENVIRONMENT}/api/files/${product.collectionName}/${product.id}/${product.product_hovered_img}`}
 												alt={product.title}
 												class="image rounded-lg product-img"
 												loading="lazy"
@@ -283,7 +283,7 @@
 										{:else}
 											<!-- svelte-ignore a11y-img-redundant-alt -->
 											<img
-												src={`http://127.0.0.1:8090/api/files/${product.collectionName}/${product.id}/${product.product_img}`}
+												src={`${data.APP_ENVIRONMENT}/api/files/${product.collectionName}/${product.id}/${product.product_img}`}
 												alt={product.title}
 												class="image rounded-lg product-img"
 												loading="lazy"

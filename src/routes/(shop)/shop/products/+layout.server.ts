@@ -1,4 +1,5 @@
 import type { LayoutServerLoad } from './$types';
+import { APP_ENVIRONMENT } from '$env/static/private'
 import { error } from '@sveltejs/kit';
 
 export const load = (async ({ locals }: any) => {
@@ -15,6 +16,7 @@ export const load = (async ({ locals }: any) => {
         }
     }
     return {
+        APP_ENVIRONMENT,
         pb_products: await fetchAllProducts()
     };
 
