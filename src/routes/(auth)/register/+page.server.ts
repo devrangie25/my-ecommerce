@@ -21,6 +21,6 @@ export const actions = {
         }
 
         // go to login page if everything goes smooth or without an error encountered
-        throw redirect(303, '/auth/login')
+        throw redirect(303, '/login')
     }
 }

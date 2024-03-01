@@ -1,6 +1,10 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
 	import cartStore from '$lib/stores/cart';
+	import checkoutStore from '$lib/stores/checkout';
 	import { goto } from '$app/navigation';
+
+	export let data;
 
 	let cart: any = [];
 	let subtotal: number = 0;
@@ -8,7 +12,15 @@
 	$: {
 		cartStore.subscribe((value: any) => {
 			cart = value;
-			subtotal = cart.map((cartItem: any) => cartItem.subtotal).reduce((result: number, current: number) => result + current, 0);
+			subtotal = cart
+				.map((cartItem: any) => cartItem.subtotal)
+				.reduce((result: number, current: number) => result + current, 0);
+		});
+	}
+
+	$: {
+		checkoutStore.subscribe((value: any) => {
+			console.log('Checkout Store in Cart Page', value);
 		});
 	}
 
@@ -80,20 +92,13 @@
 		}
 	};
 
-	const handleNavToCheckOut = () => {
-		goto('/checkout')
-	}
-
 	const handleCheckoutItems = () => {
-		/**
-		
-			checkoutObj = {
-				products: [],
-				subtotal: 0,
-			}
-		 
-		*/
-	}
+		checkoutStore.update(() => {
+			return { cart, subtotal }
+		});
+
+		goto('/checkout');
+	};
 </script>
 
 <div>
@@ -111,7 +116,7 @@
 							<div class="flex gap-x-2">
 								<div class="flex none">
 									<img
-										src={`http://127.0.0.1:8090/api/files/${item.product.collectionName}/${item.product_id}/${item.product.product_img}`}
+										src={`${data.APP_ENVIRONMENT}/api/files/${item.product.collectionName}/${item.product_id}/${item.product.product_img}`}
 										alt={`produc-image-${ind}`}
 										class="rounded-lg"
 										width="120"
@@ -155,7 +160,9 @@
 									</div>
 
 									<div class="flex items-end justify-between h-1/2">
-										<div class="flex counter justify-evenly h-9 items-center rounded-full counter-btn-container">
+										<div
+											class="flex counter justify-evenly h-9 items-center rounded-full counter-btn-container"
+										>
 											<button class=" text-white" on:click={() => handleDecrement(item, ind)}>
 												<svg
 													xmlns="http://www.w3.org/2000/svg"
@@ -217,9 +224,8 @@
 
 					<div class="xl:px-24 md:px-12 mb-4">
 						<button
-							class="btn btn-secondary btn-block h-24 btn-circle text-2xl font-semibold text-white "
-							on:click={handleNavToCheckOut}
-							>Continue to checkout</button
+							class="btn btn-secondary btn-block h-24 btn-circle text-2xl font-semibold text-white"
+							on:click={handleCheckoutItems}>Continue to checkout</button
 						>
 					</div>
 					<div class="flex items-center justify-center px-4 gap-x-2">

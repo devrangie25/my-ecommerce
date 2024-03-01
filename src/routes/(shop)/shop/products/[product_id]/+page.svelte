@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
+	import PocketBase from 'pocketbase';
 	import cartStore from '$lib/stores/cart';
 	import SideDrawer from '$lib/components/frame/+side-drawer.svelte';
 	import Alert from '$lib/components/products/+alert.svelte';
@@ -7,8 +8,11 @@
 
 	export let data: any;
 
+	const pb = new PocketBase('http://127.0.0.1:8090');
+
 	let cart: any = [];
 	let currentProduct: any = data.pb_product_by_id;
+	let currentUser: any = data.user
 	let products: any = data.pb_products;
 	let isAddedToCart: boolean = false;
 	let isDrawerOpen = false;
@@ -81,6 +85,17 @@
 		isDrawerOpen = false;
 	};
 
+	const convertStringToNumber = (str: string) => {
+		// Remove commas if present and convert to number
+		const numberValue = parseFloat(str.replace(/,/g, ''));
+		// Check if the conversion was successful
+		if (isNaN(numberValue)) {
+			throw new Error('Invalid number format');
+		}
+		return numberValue;
+	};
+
+	/** need to implement a logic if the user is logged in*/
 	const addToCart = (cart: any, newItem: any) => {
 		// Find index of item with matching id, color, and size in the cart
 		const index = cart.findIndex(
@@ -93,15 +108,18 @@
 		if (index !== -1) {
 			// If item exists in the cart, update the quantity
 			cart[index].quantity += newItem.quantity;
+			// update quantity to db
 		} else {
 			// If item does not exist in the cart, add it
+			// add item to db
 			cart.push({
 				product_id: newItem.product_id,
 				product: newItem.product,
 				color: newItem.color,
 				price: newItem.price,
 				size: newItem.size,
-				quantity: newItem.quantity
+				quantity: newItem.quantity,
+				date_added: new Date()
 			});
 		}
 
@@ -109,18 +127,6 @@
 		cart = cart.filter((item: any) => item.quantity > 0);
 
 		return cart;
-	};
-
-	const convertStringToNumber = (str: string) => {
-		// Remove commas if present and convert to number
-		const numberValue = parseFloat(str.replace(/,/g, ''));
-
-		// Check if the conversion was successful
-		if (isNaN(numberValue)) {
-			throw new Error('Invalid number format');
-		}
-
-		return numberValue;
 	};
 
 	const handleAddToCart = () => {
@@ -154,6 +160,74 @@
 			}
 		}
 	};
+
+    const fetchCustomerCart = async () => {
+        try {
+            const customerCart = await pb.collection('customer_carts').getList(1, 50, {
+				filter: `customer_id='${currentUser.id}'`
+			});
+			console.log('customerCart', customerCart)
+        } catch (err) {
+            console.log('ERROR', err)
+        }
+    }
+
+	// need to create db api.logic for add, update, cart
+	const handleUpdateCartItemQty = async(item: any) => {
+		try {
+			const data = {
+				"product_id": item.product_id,
+				"color": item.color,
+				"price": item.price,
+				"size": item.size,
+				"quantity": item.quantity,
+				"subtotal": item.subtotal,
+				"date_added": item.date_added
+			};
+
+			const updatedCartItem = await pb.collection('carts').update('RECORD_ID', data);
+			console.log('updatedCartItem', updatedCartItem)
+		} catch (error) {
+			console.error('error', error);
+		}
+	}
+	
+	const handCreateCustomerCart = async(cartItemResponse: any) => {
+		try {
+			const customerCartData = {
+				"customer_id": [
+					currentUser.id
+				],
+				"cart_id": [
+					cartItemResponse.id
+				]
+			};
+			const customerCartResponse = await pb.collection('customer_carts').create(customerCartData);
+			return customerCartResponse
+		} catch (error) {
+			console.error('error', error);
+		}
+	}
+
+	const handleAddToCartApi = async(item: any) => {
+		try {
+			const cartItemData = {
+				"product_id": item.product_id,
+				"color": item.color,
+				"price": item.price,
+				"size": item.size,
+				"quantity": item.quantity,
+				"subtotal": item.subtotal,
+				"date_added": item.date_added
+			};
+
+			const cartItemResponse = await pb.collection('carts').create(cartItemData);
+			const customerCartResponse = await handCreateCustomerCart(cartItemResponse)
+			console.log('customerCartResponse', customerCartResponse)
+		} catch (error) {
+			console.error('error', error);
+		}
+	}
 
 	const handleNavClick = () => {
 		goto('/shop/products');
@@ -191,7 +265,7 @@
 				{#each currentProduct.product_images as product_img, ind}
 					<div class="card">
 						<img
-							src={`http://127.0.0.1:8090/api/files/${currentProduct.collectionName}/${currentProduct.id}/${product_img}`}
+							src={`${data.APP_ENVIRONMENT}/api/files/${currentProduct.collectionName}/${currentProduct.id}/${product_img}`}
 							alt={`produc-image-${ind}`}
 							class="product-img"
 						/>
