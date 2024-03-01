@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { browser } from "$app/environment";
+	import { browser } from '$app/environment';
 	import { goto } from '$app/navigation';
 	import { onMount } from 'svelte';
 	import productsStore from '$lib/stores/products';
@@ -11,7 +11,7 @@
 	$: {
 		productsStore.subscribe((value: any) => {
 			if (browser) {
-				localStorage.setItem('products', JSON.stringify(value))
+				localStorage.setItem('products', JSON.stringify(value));
 			}
 		});
 	}
@@ -103,7 +103,7 @@
 		{ title: 'Maryjane', checked: false },
 		{ title: 'Oxford', checked: false },
 		{ title: 'Sneakers', checked: false },
-		{ title: 'Loafer', checked: false },
+		{ title: 'Loafer', checked: false }
 	];
 
 	let hoveredImage: number | null = null;
@@ -126,18 +126,23 @@
 </script>
 
 <div class="px-10 md:px-0">
-	<div class="mb-4 text-6xl font-semibold font-harmonia">High end women's shoes</div>
-	<div class="text-xl font-medium font-harmonia">
+	<div class="mb-4 lg:text-6xl md:text-5xl text-4xl font-semibold font-harmonia">High end women's shoes</div>
+	<div class="lg:text-xl md:text-lg text-base font-medium font-harmonia">
 		Well designed shoes made from quality materials.
 	</div>
 
-	<div class="flex items-center justify-end">
+	<div class="md:flex hidden items-center justify-end">
 		<Dropdown />
 	</div>
 
 	<div class="mt-10">
+		<div class="md:hidden grid grid-cols-2 gap-x-4">
+			<button class="btn bg-white border-none btn-ghost rounded"> Refine By </button>
+			<button class="btn bg-white border-none btn-ghost rounded"> Manual </button>
+		</div>
+		<div class="md:hidden flex divider py-4"></div>
 		<div class="grid grid-cols-4 md:gap-6 gap-4">
-			<div class="md:col-span-1 md:mb-0 mb-6">
+			<div class="md:col-span-1 md:block hidden md:mb-0 mb-6">
 				{#each controllers as { title, id }, ind}
 					<div class="collapse collapse-arrow border-t rounded-none border-base-200">
 						<input type="checkbox" />

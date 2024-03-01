@@ -1,6 +1,6 @@
 <script lang="ts">
 	export let msg: string = 'Alert';
-    export let bg: string = 'secondary'
+    export const bg: string = 'secondary'
     export let width: string = 'w-1/2'
 </script>
 
