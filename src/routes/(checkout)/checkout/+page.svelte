@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { goto } from '$app/navigation'
+	import { goto } from '$app/navigation';
 	import type { PageData } from './$types';
 	import checkoutStore from '$lib/stores/checkout';
 
@@ -8,13 +8,13 @@
 	let delivery_method: string = 'shipment';
 	let { countries } = data;
 	let address: string = '';
-	let checkoutCartItems: any = null
-	let minimumShippingFee: number = 4532
+	let checkoutCartItems: any = null;
+	let minimumShippingFee: number = 4532;
 
 	$: {
 		checkoutStore.subscribe((value: any) => {
 			console.log('Checkout Store in Checkout Page', value);
-			checkoutCartItems = value
+			checkoutCartItems = value;
 		});
 	}
 
@@ -36,12 +36,14 @@
 
 <div class="container mx-auto">
 	{#if checkoutCartItems}
-		<div class="grid grid-cols-2">
+		<div class="grid md:grid-cols-2">
 			<!-- Customer Details -->
-			<div class="col-span-1 bg-white">
+			<div class="col-span-1 bg-white order-last md:order-first">
 				<div class="p-8">
 					<div class="flex flex-col w-full border-opacity-50">
-						<div class="text-center font-harmonia text-sm text-slate-500 mb-4">Express Checkout</div>
+						<div class="text-center font-harmonia text-sm text-slate-500 mb-4">
+							Express Checkout
+						</div>
 						<div class="grid grid-cols-3 gap-x-2">
 							<button class="btn shop-pay-btn h-12 rounded">
 								<svg
@@ -133,12 +135,12 @@
 						<div class="divider font-harmonia text-sm text-slate-500 mb-6">OR</div>
 
 						<div>
-							<form action="">
+							<form method="POST" action="?/payment" >
 								<div class="mb-8">
 									<div class="font-sans flex justify-between items-end">
 										<div class="text-2xl font-semibold">Contact</div>
 										<div>
-											Have an account? <a href="/login"> Login</a>
+											Have an account? <a href="/login" class="text-primary"> Login</a>
 										</div>
 									</div>
 									<div class="mt-4">
@@ -194,7 +196,8 @@
 												aria-label="test"
 												placeholder="Select your country"
 											>
-												<option disabled selected class="text-slate-600">Select your country</option>
+												<option disabled selected class="text-slate-600">Select your country</option
+												>
 												{#if countries}
 													{#each countries as { name }, ind}
 														<option>{name.common}</option>
@@ -206,39 +209,46 @@
 										<div class="space-y-4 mb-6">
 											<div class="flex space-x-2">
 												<input
+													name="firstname"
 													type="text"
 													placeholder="First name"
 													class="bg-white input input-bordered w-full rounded text-sm"
 												/>
 												<input
+													name="lastname"
 													type="text"
 													placeholder="Last name"
 													class="bg-white input input-bordered w-full rounded text-sm"
 												/>
 											</div>
 											<input
+												name="company"
 												type="text"
 												placeholder="Company (optional)"
 												class="bg-white input input-bordered w-full rounded text-sm"
 											/>
 											<input
+												name="line_address_1"
 												type="text"
 												placeholder="Address"
 												class="bg-white input input-bordered w-full rounded text-sm"
 											/>
 											<div class="flex space-x-2">
 												<input
+													name="city"
 													type="text"
 													placeholder="City"
 													class="bg-white input input-bordered w-full rounded text-sm"
 												/>
 												<input
-													type="text"
+													name="zip_postcode"
+													type="number"
 													placeholder="Postal code"
 													class="bg-white input input-bordered w-full rounded text-sm"
 												/>
 											</div>
 											<input
+												name="phone"
 												type="text"
 												placeholder="Phone"
 												class="bg-white input input-bordered w-full rounded text-sm"
@@ -250,7 +260,9 @@
 												<div class="text-xl font-semibold">Shipping method</div>
 											</div>
 											{#if !address}
-												<div class="card bg-slate-100 text-sm h-12 p-4 rounded shipping-method-empty">
+												<div
+													class="card bg-slate-100 text-sm h-12 p-4 rounded shipping-method-empty"
+												>
 													Enter your shipping address to view available shipping methods.
 												</div>
 											{:else}
@@ -343,7 +355,9 @@
 						{#each checkoutCartItems.cart as item, ind}
 							<div class="flex space-x-4">
 								<div class="indicator">
-									<span class="indicator-item badge badge-sm badge-primary h-6">{item.quantity}</span>
+									<span class="indicator-item badge badge-sm badge-primary h-6"
+										>{item.quantity}</span
+									>
 									<div class="grid w-20 place-items-center">
 										<img
 											src={`${data.APP_ENVIRONMENT}/api/files/${item.product.collectionName}/${item.product_id}/${item.product.product_img}`}
@@ -370,7 +384,7 @@
 									class="input input-bordered bg-white w-full rounded text-sm"
 								/>
 							</div>
-							<div>
+							<div >
 								<button class="btn btn-accent rounded"> Apply Voucher </button>
 							</div>
 						</div>
@@ -389,7 +403,8 @@
 							<div class="flex justify-between items-center font-sans pt-2">
 								<div class="text-2xl font-semibold">Total</div>
 								<div class="text-2xl font-semibold">
-									<span class="text-sm text-gray-400"> PHP </span> {formatPeso(minimumShippingFee + checkoutCartItems?.subtotal)}
+									<span class="text-sm text-gray-400"> PHP </span>
+									{formatPeso(minimumShippingFee + checkoutCartItems?.subtotal)}
 								</div>
 							</div>
 						</div>
@@ -398,14 +413,16 @@
 			</div>
 		</div>
 	{:else}
-		<div
-			class="card w-full bg-white h-96 flex justify-center items-center text-slate-400 text-4xl font-harmonia font-medium"
-		>
-			Your bag is empty
+		<div class="h-screen flex items-center justify-center">
+			<div
+				class="card w-full md:bg-accent h-1/2 flex justify-center items-center text-slate-400 md:text-4xl text-2xl font-harmonia font-medium -mt-24"
+			>
+				Your bag is empty
 
-			<button class="mt-6 btn btn-primary rounded-full px-6" on:click={() => goto('/')}>
-				Go to shopping
-			</button>
+				<button class="mt-6 btn btn-primary rounded-full px-6" on:click={() => goto('/')}>
+					Go to shopping
+				</button>
+			</div>
 		</div>
 	{/if}
 </div>
@@ -433,9 +450,5 @@
 	}
 	.items-container {
 		background-color: #f5f5f5;
-		width: 100%;
-		position: sticky;
-		top: 0;
-		z-index: 1000; /* Adjust z-index if needed */
 	}
 </style>

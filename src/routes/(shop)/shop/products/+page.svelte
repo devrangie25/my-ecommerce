@@ -29,6 +29,7 @@
     let innerHeight = 0
 
 	onMount(() => {
+		console.log('data Products Page', data)
 		products = [...data.pb_products];
 		productsStore.update(() => {
 			return [...products];

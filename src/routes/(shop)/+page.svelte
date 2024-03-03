@@ -13,13 +13,6 @@
 	let landing_text = 'Spring Staples';
 	let landing_sub_text = 'The Neiva Mary Jane';
 
-	$: {
-		checkoutStore.subscribe((value: any) => {
-			console.log('Checkout Store in Landing Page', value);
-			console.log('Landing Page', data)
-		});
-	}
-
 	const goToProductsPage = () => {
 		goto(`shop/products`);
 	};
