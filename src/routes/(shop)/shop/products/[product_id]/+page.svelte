@@ -8,7 +8,7 @@
 
 	export let data: any;
 
-	const pb = new PocketBase('http://127.0.0.1:8090');
+	const pb = new PocketBase(data.APP_ENVIRONMENT);
 
 	let cart: any = [];
 	let currentProduct: any = data.pb_product_by_id;

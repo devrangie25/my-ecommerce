@@ -1,4 +1,5 @@
 import { error } from '@sveltejs/kit';
+import { APP_ENVIRONMENT } from '$env/static/private'
 
 /** @type {import('./$types').PageServerLoad} */
 export async function load({ params, locals }: any) {
@@ -14,6 +15,7 @@ export async function load({ params, locals }: any) {
     }
 
     return {
-        pb_product_by_id: await fetchSingleProductById()
+        pb_product_by_id: await fetchSingleProductById(),
+        APP_ENVIRONMENT
     };
 }
