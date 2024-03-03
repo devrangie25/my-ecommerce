@@ -5,5 +5,4 @@ export const load = (async ({ locals }: any) => {
             user: JSON.parse(JSON.stringify(locals.user))
         }
     }
-
 })

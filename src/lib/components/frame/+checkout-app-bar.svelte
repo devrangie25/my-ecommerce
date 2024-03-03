@@ -27,7 +27,7 @@
             on:click={navigateToHome}
 			class="sm:w-260 xl:w-290 cursor-pointer"
 			fill="none"
-			height="40"
+			height="35"
 			viewBox="0 0 303 61"
 			width="250"
 			xmlns="http://www.w3.org/2000/svg"

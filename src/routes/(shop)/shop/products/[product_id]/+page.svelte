@@ -8,7 +8,7 @@
 
 	export let data: any;
 
-	const pb = new PocketBase('http://127.0.0.1:8090');
+	const pb = new PocketBase(data.APP_ENVIRONMENT);
 
 	let cart: any = [];
 	let currentProduct: any = data.pb_product_by_id;
@@ -234,7 +234,7 @@
 	};
 </script>
 
-<div class="flex mb-8 items-center justify-between">
+<div class="flex mb-8 px-4 lg:px-0 items-center justify-between">
 	<div>
 		<button class="flex items-center" on:click={handleNavClick}>
 			<svg
@@ -253,28 +253,47 @@
 		</button>
 	</div>
 	{#if isAddedToCart}
-		<div class="flex justify-end">
-			<Alert msg={`Successfully added to cart`} width="w-96" bg="primary" />
-		</div>
+		<div class="toast toast-center border-none lg:w-1/4 w-1/2">
+			<div class="alert text-white rounded border-none flex justify-center">
+			  <span>Successfully added to cart</span>
+			</div>
+		  </div>
 	{/if}
 </div>
-<div class="px-4 md:px-0 grid grid-cols-3 gap-4">
-	<div class="col-span-2">
+<div class="px-4 md:px-0 grid lg:grid-cols-3 grid-cols-1 gap-4">
+	<div class="md:col-span-2 col-span-1">
 		<div class="grid grid-cols-2 gap-4">
 			{#if currentProduct?.product_images.length > 0}
 				{#each currentProduct.product_images as product_img, ind}
 					<div class="card">
 						<img
 							src={`${data.APP_ENVIRONMENT}/api/files/${currentProduct.collectionName}/${currentProduct.id}/${product_img}`}
-							alt={`produc-image-${ind}`}
-							class="product-img"
+							alt={`product-image-${ind}`}
+							class="product-img object-cover"
 						/>
 					</div>
 				{/each}
 			{/if}
 		</div>
+		<!-- <div class="carousel w-full">
+			{#if currentProduct?.product_images.length > 0}
+				{#each currentProduct.product_images as product_img, ind}
+					<div id={`slide${ind}`} class="carousel-item relative w-full">
+						<img
+							src={`${data.APP_ENVIRONMENT}/api/files/${currentProduct.collectionName}/${currentProduct.id}/${product_img}`}
+							alt={`product-image-${ind}`}
+							class="w-full"
+						/>
+						<div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+						  <a href={`#slide${ind < 1 ? currentProduct.product_images.length - 1 : ind - 1}`} class="btn btn-circle">❮</a> 
+						  <a href={`#slide${ind === currentProduct.product_images.length - 1 ? 0 : ind + 1}`} class="btn btn-circle">❯</a>
+						</div>
+					  </div> 
+				{/each}
+			{/if}
+		</div> -->
 	</div>
-	<div class="col-span-1 p-4">
+	<div class="col-span-1 p-4 mt-6 lg:mt-0">
 		<div class="flex justify-between mb-4">
 			<div class="font-frank text-3xl font-medium">
 				<div>
@@ -381,7 +400,7 @@
 					>Add to cart - ₱{currentProduct.price}</button
 				>
 			</div>
-			<div class="flex items-center px-4 gap-x-2">
+			<div class="flex items-center justify-center px-4 gap-x-2">
 				<div class="badge badge-lg border-none font-harmonia font-semibold h-8">
 					afterpay
 					<svg
@@ -466,7 +485,7 @@
 		</div>
 	</div>
 
-	<SideDrawer padding="p-0" width="w-1/4" isOpen={isDrawerOpen} on:drawer={handleDrawerEvent}>
+	<SideDrawer padding="p-0" width="lg:w-1/4 w-3/4" isOpen={isDrawerOpen} on:drawer={handleDrawerEvent}>
 		<div class="navbar bg-info px-6 h-20">
 			<div class="flex-1">
 				<span class="text-2xl font-semibold font-harmonia">Choose a size</span>
@@ -514,7 +533,15 @@
 
 <style>
 	.product-img {
-		height: 668px;
+		height: 100%;
+	}
+
+	.toast {
+		z-index: 100;
+	}
+
+	.alert {
+		background-color: #a36448;
 	}
 	.badge {
 		background-color: #b2fce4;
