@@ -42,7 +42,7 @@
 				<!-- svelte-ignore a11y-no-static-element-interactions -->
 				<div class={`card card-compact rounded-none	w-full bg-white shadow-none font-harmonia`}>
 						<!-- svelte-ignore a11y-img-redundant-alt -->
-						<img src={pick.img} alt="Hovered Shoes" class="image" />
+						<img src={pick.img} alt="Hovered Shoes" class="img-default" />
 					<div class="mt-2">
 						<div class="flex justify-between font-semibold mb-2">
 							<span class="text-secondary text-2xl">
@@ -79,9 +79,38 @@
 	.montreal-text {
 		line-height: 48px;
 	}
-	.image {
+	.img-default {
 		object-fit: cover;
-		height: 600px;
 		transition: transform 0.1s ease-in-out;
+	}
+
+	@media (min-width: 100px) {
+		.img-default {
+			height: 100%;
+		}
+	}
+
+	@media (min-width: 640px) {
+		.img-default {
+			height: 100%;
+		}
+	}
+
+	@media (min-width: 768px) {
+		.img-default {
+			height: 450px;
+		}
+	}
+
+	@media (min-width: 1024px) {
+		.img-default {
+			height: 500px;
+		}
+	}
+
+	@media (min-width: 1280px) {
+		.img-default {
+			height: 600px;
+		}
 	}
 </style>

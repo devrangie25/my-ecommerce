@@ -33,7 +33,7 @@
 		</div>
 	</div>
 
-	<div class="md:px-24 mt-12 grid lg:grid-cols-4 grid-cols-1 gap-10 font-harmonia">
+	<div class="md:px-24 mt-12 grid lg:grid-cols-4 grid-cols-1 gap-10 md:gap-y-16 gap-y-32 font-harmonia">
 		{#each stores as store, ind}
 			<div class={`${ind === stores.length - 1 ? 'lg:col-start-2 lg:col-span-2' : 'lg:col-span-2'}`}>
 				<img src={store.img} alt={store.title} class="w-full store-img" />
@@ -55,14 +55,40 @@
 		{/each}
 	</div>
 
-	<div class="mt-16 flex justify-center">
+	<div class="xl:mt-16 lg:mt-32 mt-32 flex justify-center">
 		<button class="btn btn-primary border-0 rounded-full px-6 text-white font-harmonia font-semibold">About our stores</button>
 	</div>
 </div>
 
 <style>
-	.store-img {
-		height: 400px;
+	@media (min-width: 100px) {
+		.store-img {
+			height: 100%;
+		}
+	}
+
+	@media (min-width: 640px) {
+		.store-img {
+			height: 100%;
+		}
+	}
+
+	@media (min-width: 768px) {
+		.store-img {
+			height: 100%;
+		}
+	}
+
+	@media (min-width: 1024px) {
+		.store-img {
+			height: 100%;
+		}
+	}
+
+	@media (min-width: 1280px) {
+		.store-img {
+			height: 400px;
+		}
 	}
 
     button {

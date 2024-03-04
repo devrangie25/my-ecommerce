@@ -9,7 +9,7 @@
 
 <div>
 	<SystemBar currentUser={data?.user} />
-	<AppBar>
+	<AppBar currentUser={data?.user}>
 		<div>
 			<slot />
 		</div>

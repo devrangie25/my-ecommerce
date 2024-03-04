@@ -11,8 +11,8 @@
 <div class="container mx-auto px-10 md:px-0">
 	<div class="flex justify-center">
 		<div class="text-center">
-			<div class="md:text-6xl text-4xl text-primary font-semibold font-harmonia">Winter styles are here.</div>
-			<div class="md:text-6xl text-4xl font-normal font-frank mt-2 text-primary">Discover the collection.</div>
+			<div class="md:text-6xl sm:text-4xl text-3xl text-primary font-semibold font-harmonia">Winter styles are here.</div>
+			<div class="md:text-6xl sm:text-4xl text-3xl font-normal font-frank mt-2 text-primary">Discover the collection.</div>
 		</div>
 	</div>
 	<div class="mt-16 flex justify-center">
@@ -47,12 +47,12 @@
 			<div dir="ltr" class="h-full">
 				<img class="img-default rounded-s-lg w-full object-cover" src={founders} alt="Shoes" />
 			</div>
-			<div class="container-dev rounded-br-lg rounded-tr-lg p-20 flex items-center">
+			<div class="container-dev rounded-br-lg rounded-tr-lg md:p-20 p-16 flex items-center">
 				<div>
-					<div class="font-semibold description text-secondary font-harmonia">
+					<div class="font-semibold lg:text-5xl md:text-4xl text-3xl text-secondary font-harmonia">
 						{description}
 					</div>
-					<div class="mt-4 font-semibold text-xs text-secondary font-harmonia">
+					<div class="mt-4 font-semibold md:text-lg text-sm text-secondary font-harmonia">
 						{sub_description}
 					</div>
 
@@ -71,16 +71,16 @@
 		height: 56px;
 		font-size: 16px;
 	}
-	.description {
+	/* .description {
 		font-size: 40px;
 		line-height: 48px;
-	}
+	} */
 	.container-dev {
 		background-color: #ccd3e3;
 	}
-	.img-default  {
+	/* .img-default  {
 		height: 780px;
-	}
+	} */
 	.centered-text {
 		position: absolute;
 		top: 50%;
@@ -88,5 +88,35 @@
 		transform: translate(-50%, -50%);
 		text-align: center;
 		color: white; /* Adjust text color as needed */
+	}
+
+	@media (min-width: 100px) {
+		.img-default {
+			height: 100%;
+		}
+	}
+
+	@media (min-width: 640px) {
+		.img-default {
+			height: 100%;
+		}
+	}
+
+	@media (min-width: 768px) {
+		.img-default {
+			height: 100%;
+		}
+	}
+
+	@media (min-width: 1024px) {
+		.img-default {
+			height: 100%;
+		}
+	}
+
+	@media (min-width: 1280px) {
+		.img-default {
+			height: 780px;
+		}
 	}
 </style>
