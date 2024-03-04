@@ -1,5 +1,5 @@
 <script lang="ts">
-	import ProductsController from '$lib/components/products/+products-controller.svelte'
+	import ProductsController from '$lib/components/products/+products-controller.svelte';
 	import { browser } from '$app/environment';
 	import { goto } from '$app/navigation';
 	import { onMount } from 'svelte';
@@ -17,26 +17,25 @@
 		});
 	}
 
-    $: mdWidthCondition = innerWidth < 1024
+	$: mdWidthCondition = innerWidth < 1024;
 
-	let products: Array<any> = [];
+	let products: any = [];
 
 	let hoveredImage: number | null = null;
 
-	let isDrawerOpen: boolean = false
+	let isDrawerOpen: boolean = false;
 
-	let innerWidth = 0
-    let innerHeight = 0
+	let innerWidth = 0;
+	let innerHeight = 0;
 
 	onMount(() => {
-		console.log('data Products Page', data)
 		products = [...data.pb_products];
 		productsStore.update(() => {
 			return [...products];
 		});
 		hoveredImage = null;
 	});
-	
+
 	const handleDrawerEvent = (event: any) => {
 		isDrawerOpen = event.detail.open;
 	};
@@ -48,12 +47,38 @@
 	const handleHover = (id: any) => {
 		hoveredImage = id;
 	};
+
+	const handleFilterStyles = ({ detail: styles }: any) => {
+		/** Temporary Filter - Not Dynamic */
+		console.log('handleFilterStyles', styles)
+		let savedProducts: any = localStorage.getItem('products');
+		let savedParsedProducts = JSON.parse(savedProducts);
+		if (styles.length > 0) {
+			products = products.filter((product: any) => styles.includes(product.style));
+		} else {
+			products = savedParsedProducts
+		}
+	};
+
+	const handleFilterColors = ({ detail: colors }: any) => {
+		/** Temporary Filter - Not Dynamic */
+		console.log('handleFilterColors', colors)
+		let savedProducts: any = localStorage.getItem('products');
+		let savedParsedProducts = JSON.parse(savedProducts);
+		if (colors.length > 0) {
+			products = products.filter((product: any) => colors.includes(product.color));
+		} else {
+			products = savedParsedProducts
+		}
+	};
 </script>
 
 <svelte:window bind:innerWidth bind:innerHeight />
 
 <div class="px-10 md:px-0">
-	<div class="mb-4 lg:text-6xl md:text-5xl text-4xl font-semibold font-harmonia">High end women's shoes</div>
+	<div class="mb-4 lg:text-6xl md:text-5xl text-4xl font-semibold font-harmonia">
+		High end women's shoes
+	</div>
 	<div class="lg:text-xl md:text-lg text-base font-medium font-harmonia">
 		Well designed shoes made from quality materials.
 	</div>
@@ -64,13 +89,18 @@
 
 	<div class="mt-10">
 		<div class="lg:hidden grid grid-cols-2 gap-x-4">
-			<button class="btn bg-white border-none btn-ghost rounded" on:click={() => (isDrawerOpen = !isDrawerOpen)}> Refine By </button>
+			<button
+				class="btn bg-white border-none btn-ghost rounded"
+				on:click={() => (isDrawerOpen = !isDrawerOpen)}
+			>
+				Refine By
+			</button>
 			<button class="btn bg-white border-none btn-ghost rounded"> Manual </button>
 		</div>
 		<div class="lg:hidden flex divider py-4"></div>
 		<div class="grid lg:grid-cols-4 md:grid-cols-3 md:gap-6 gap-4">
 			<div class="lg:col-span-1 lg:block hidden lg:mb-0 mb-6">
-				<ProductsController sidebar={mdWidthCondition}/>
+				<ProductsController on:filter-styles={handleFilterStyles} sidebar={mdWidthCondition} on:filter-colors={handleFilterColors} />
 			</div>
 
 			<div class="md:col-span-3 col-span-4">
@@ -178,7 +208,7 @@
 	</div>
 
 	<div class="p-6">
-		<ProductsController sidebar={mdWidthCondition} />
+		<ProductsController on:filter-styles={handleFilterStyles} on:filter-colors={handleFilterColors} sidebar={mdWidthCondition} />
 	</div>
 </SideDrawer>
 
