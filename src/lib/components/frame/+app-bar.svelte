@@ -2,6 +2,8 @@
 	import { goto } from '$app/navigation';
 	import cartStore from '$lib/stores/cart';
 
+	export let currentUser: any;
+
 	const main_navs = [
 		{
 			title: 'Footwear'
@@ -75,9 +77,9 @@
 				<!-- svelte-ignore a11y-no-static-element-interactions -->
 				<div class="cursor-pointer" on:click={navigateToHome}>
 					<svg
-						class="sm:w-260 xl:w-290"
+						class="md:w-200 w-full h-8 md:h-full xl:w-260"
 						fill="none"
-						height="42"
+						height="40"
 						viewBox="0 0 303 61"
 						width="303"
 						xmlns="http://www.w3.org/2000/svg"
@@ -129,10 +131,10 @@
 			</div>
 
 			<div class="navbar-end">
-				<div class="navs uppercase font-bold mr-8">
+				<div class="navs uppercase font-bold md:mr-8">
 					<span class="nav-title"> Stores </span>
 				</div>
-				<button class="btn btn-ghost btn-circle">
+				<button class="navs btn btn-ghost btn-circle">
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
 						class="h-5 w-5"
@@ -155,7 +157,7 @@
 							viewBox="0 0 24 24"
 							stroke-width="1.5"
 							stroke="currentColor"
-							class="w-6 h-6"
+							class="md:w-6 w-5 md:h-6 h-5"
 						>
 							<path
 								stroke-linecap="round"
@@ -175,11 +177,27 @@
 	</div>
 	<div class="drawer-side">
 		<label for="my-drawer-3" aria-label="close sidebar" class="drawer-overlay"></label>
-		<ul class="menu p-4 w-80 min-h-full bg-white">
-			<!-- svelte-ignore a11y-missing-attribute -->
-			<li><a>Sidebar Item 1</a></li>
-			<!-- svelte-ignore a11y-missing-attribute -->
-			<li><a>Sidebar Item 2</a></li>
+		<ul class="menu p-4 w-80 min-h-full bg-white gap-y-4 static">
+			{#each main_navs as nav}
+				<!-- svelte-ignore a11y-missing-attribute -->
+				<li><a class="text-2xl font-harmonia">{nav.title}</a></li>
+			{/each}
+
+			<li class="absolute left-0 bottom-4 w-full active:bg-violet-700">
+				<div class=" flex justify-center">
+					<button class="btn btn-primary btn-block rounded">
+						{#if currentUser}
+							<a href="/logout" class="uppercase font-harmonia text-xs font-semibold text-white">
+								Log Out
+							</a>
+						{:else}
+							<a href="/login" class="uppercase font-harmonia text-xs font-semibold text-white">
+								Log In
+							</a>
+						{/if}
+					</button>
+				</div>
+			</li>
 		</ul>
 	</div>
 </div>

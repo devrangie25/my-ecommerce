@@ -65,14 +65,14 @@
 <div class="container mx-auto px-10 md:px-0">
 	<div class="flex justify-center">
 		<div class="text-center">
-			<div class="md:text-6xl text-4xl text-primary font-semibold font-harmonia">Staff Picks</div>
-			<div class="md:text-6xl text-4xl mt-2 text-primary font-normal font-frank">
+			<div class="md:text-6xl sm:text-4xl text-3xl text-primary font-semibold font-harmonia">Staff Picks</div>
+			<div class="md:text-6xl sm:text-4xl text-3xl mt-2 text-primary font-normal font-frank">
 				Our current favourites
 			</div>
 		</div>
 	</div>
 	<div class="mt-12 flex justify-center">
-		<div class="grid lg:grid-cols-4 grid-cols-2 gap-10">
+		<div class="grid lg:grid-cols-4 sm:grid-cols-2 xs:grid-cols-1 gap-10">
 			{#each pickImages as pick (pick.id)}
 				<!-- svelte-ignore a11y-no-static-element-interactions -->
 				<div
@@ -111,7 +111,36 @@
 	.image {
 		object-fit: cover;
 		width: 100%;
-		height: 100%;
 		transition: transform 0.1s ease-in-out;
+	}
+
+	@media (min-width: 100px) {
+		.image {
+			height: 400px;
+		}
+	}
+
+	@media (min-width: 640px) {
+		.image {
+			height: 330px;
+		}
+	}
+
+	@media (min-width: 768px) {
+		.image {
+			height: 350px;
+		}
+	}
+
+	@media (min-width: 1024px) {
+		.image {
+			height: 300px;
+		}
+	}
+
+	@media (min-width: 1280px) {
+		.image {
+			height: 470px;
+		}
 	}
 </style>
