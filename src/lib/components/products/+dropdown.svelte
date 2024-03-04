@@ -1,28 +1,9 @@
 <script lang="ts">
-	let options = [
-		{
-			title: 'Manual'
-		},
-		{
-			title: 'Best selling'
-		},
-		{
-			title: 'Title ascending'
-		},
-		{
-			title: 'Title descending'
-		},
-		{
-			title: 'Price ascending'
-		},
-		{
-			title: 'Price descending'
-		}
-	];
+	import { PRODUCTS_DEFAULT_FILTER } from '$lib/static/temp';
 </script>
 
 <select class="select select-bordered w-48 max-w-xs">
-	{#each options as { title }, ind}
-		<option selected={ind < 1}>{ title }</option>
+	{#each PRODUCTS_DEFAULT_FILTER as { title }, ind}
+		<option selected={ind < 1}>{title}</option>
 	{/each}
 </select>
